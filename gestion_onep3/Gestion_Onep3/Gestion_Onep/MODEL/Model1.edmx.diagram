@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="551522cbe8e64243884a4dd36b569898" Name="Diagramme1">
+        <EntityTypeShape EntityType="gestion_agentModel.agent" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_agentModel.Demande" Width="1.5" PointX="5.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_agentModel.registration" Width="1.5" PointX="5.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_agentModel.Role" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_agentModel.service" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="gestion_agentModel.typeconge" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <AssociationConnector Association="gestion_agentModel.FK__agent__Role_Id__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_agentModel.FK__agent__Service_I__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_agentModel.FK_agent_agent" ManuallyRouted="false" />
+        <AssociationConnector Association="gestion_agentModel.FK_role_agent" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

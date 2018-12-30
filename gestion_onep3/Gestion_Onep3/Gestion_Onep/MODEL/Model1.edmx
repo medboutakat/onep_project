@@ -1,0 +1,394 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="gestion_agentModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="gestion_agentModelStoreContainer">
+          <EntitySet Name="agent" EntityType="gestion_agentModel.Store.agent" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Demande" EntityType="gestion_agentModel.Store.Demande" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="registration" EntityType="gestion_agentModel.Store.registration" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Role" EntityType="gestion_agentModel.Store.Role" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="service" EntityType="gestion_agentModel.Store.service" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="typeconge" EntityType="gestion_agentModel.Store.typeconge" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__agent__Role_Id__31EC6D26" Association="gestion_agentModel.Store.FK__agent__Role_Id__31EC6D26">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="agent" EntitySet="agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__agent__Service_I__2A4B4B5E" Association="gestion_agentModel.Store.FK__agent__Service_I__2A4B4B5E">
+            <End Role="service" EntitySet="service" />
+            <End Role="agent" EntitySet="agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_agent_agent" Association="gestion_agentModel.Store.FK_agent_agent">
+            <End Role="agent" EntitySet="agent" />
+            <End Role="agent1" EntitySet="agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_role_agent" Association="gestion_agentModel.Store.FK_role_agent">
+            <End Role="agent" EntitySet="agent" />
+            <End Role="agent1" EntitySet="agent" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="agent">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="varchar" MaxLength="20" />
+          <Property Name="Prenom" Type="varchar" MaxLength="20" />
+          <Property Name="CIN" Type="varchar" MaxLength="30" />
+          <Property Name="Tel" Type="int" />
+          <Property Name="Email" Type="varchar" MaxLength="30" />
+          <Property Name="Service_Id" Type="int" />
+          <Property Name="Fonction" Type="varchar" MaxLength="50" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="Role_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Demande">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id_agent" Type="int" />
+          <Property Name="date_demande" Type="datetime" />
+          <Property Name="du" Type="datetime" />
+          <Property Name="au" Type="datetime" />
+          <Property Name="nbrjour" Type="int" />
+          <Property Name="type" Type="varchar" MaxLength="50" />
+          <Property Name="Precisions" Type="varchar(max)" />
+          <Property Name="remark" Type="varchar(max)" />
+          <Property Name="opinion" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="registration">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="40" />
+          <Property Name="Passworde" Type="char" MaxLength="40" />
+          <Property Name="confirmPass" Type="char" MaxLength="40" />
+          <Property Name="mobile" Type="int" />
+          <Property Name="Adresse" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" />
+          <Property Name="Remarque" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="service">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="varchar" MaxLength="20" />
+          <Property Name="Remarque" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="typeconge">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="varchar" MaxLength="20" />
+          <Property Name="Remarque" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__agent__Role_Id__31EC6D26">
+          <End Role="Role" Type="gestion_agentModel.Store.Role" Multiplicity="0..1" />
+          <End Role="agent" Type="gestion_agentModel.Store.agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="agent">
+              <PropertyRef Name="Role_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__agent__Service_I__2A4B4B5E">
+          <End Role="service" Type="gestion_agentModel.Store.service" Multiplicity="0..1" />
+          <End Role="agent" Type="gestion_agentModel.Store.agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="service">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="agent">
+              <PropertyRef Name="Service_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_agent_agent">
+          <End Role="agent" Type="gestion_agentModel.Store.agent" Multiplicity="1" />
+          <End Role="agent1" Type="gestion_agentModel.Store.agent" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="agent">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="agent1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_role_agent">
+          <End Role="agent" Type="gestion_agentModel.Store.agent" Multiplicity="1" />
+          <End Role="agent1" Type="gestion_agentModel.Store.agent" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="agent">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="agent1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="gestion_agentModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="gestion_agentEntities6" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="agent" EntityType="gestion_agentModel.agent" />
+          <EntitySet Name="Demande" EntityType="gestion_agentModel.Demande" />
+          <EntitySet Name="registration" EntityType="gestion_agentModel.registration" />
+          <EntitySet Name="Role" EntityType="gestion_agentModel.Role" />
+          <EntitySet Name="service" EntityType="gestion_agentModel.service" />
+          <EntitySet Name="typeconge" EntityType="gestion_agentModel.typeconge" />
+          <AssociationSet Name="FK__agent__Role_Id__31EC6D26" Association="gestion_agentModel.FK__agent__Role_Id__31EC6D26">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="agent" EntitySet="agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__agent__Service_I__2A4B4B5E" Association="gestion_agentModel.FK__agent__Service_I__2A4B4B5E">
+            <End Role="service" EntitySet="service" />
+            <End Role="agent" EntitySet="agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_agent_agent" Association="gestion_agentModel.FK_agent_agent">
+            <End Role="agent" EntitySet="agent" />
+            <End Role="agent1" EntitySet="agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_role_agent" Association="gestion_agentModel.FK_role_agent">
+            <End Role="agent" EntitySet="agent" />
+            <End Role="agent1" EntitySet="agent" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="agent">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Prenom" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="CIN" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="Tel" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="Service_Id" Type="Int32" />
+          <Property Name="Fonction" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Password" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Role_Id" Type="Int32" />
+          <NavigationProperty Name="Role" Relationship="gestion_agentModel.FK__agent__Role_Id__31EC6D26" FromRole="agent" ToRole="Role" />
+          <NavigationProperty Name="service" Relationship="gestion_agentModel.FK__agent__Service_I__2A4B4B5E" FromRole="agent" ToRole="service" />
+          <NavigationProperty Name="agent1" Relationship="gestion_agentModel.FK_agent_agent" FromRole="agent" ToRole="agent1" />
+          <NavigationProperty Name="agent2" Relationship="gestion_agentModel.FK_agent_agent" FromRole="agent1" ToRole="agent" />
+          <NavigationProperty Name="agent11" Relationship="gestion_agentModel.FK_role_agent" FromRole="agent" ToRole="agent1" />
+          <NavigationProperty Name="agent3" Relationship="gestion_agentModel.FK_role_agent" FromRole="agent1" ToRole="agent" />
+        </EntityType>
+        <EntityType Name="Demande">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="id_agent" Type="Int32" />
+          <Property Name="date_demande" Type="DateTime" Precision="3" />
+          <Property Name="du" Type="DateTime" Precision="3" />
+          <Property Name="au" Type="DateTime" Precision="3" />
+          <Property Name="nbrjour" Type="Int32" />
+          <Property Name="type" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Precisions" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="remark" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="opinion" Type="Byte" />
+        </EntityType>
+        <EntityType Name="registration">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+          <Property Name="Passworde" Type="String" MaxLength="40" Unicode="false" FixedLength="true" />
+          <Property Name="confirmPass" Type="String" MaxLength="40" Unicode="false" FixedLength="true" />
+          <Property Name="mobile" Type="Int32" />
+          <Property Name="Adresse" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Remarque" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="agent" Relationship="gestion_agentModel.FK__agent__Role_Id__31EC6D26" FromRole="Role" ToRole="agent" />
+        </EntityType>
+        <EntityType Name="service">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Remarque" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="agent" Relationship="gestion_agentModel.FK__agent__Service_I__2A4B4B5E" FromRole="service" ToRole="agent" />
+        </EntityType>
+        <EntityType Name="typeconge">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Remarque" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__agent__Role_Id__31EC6D26">
+          <End Role="Role" Type="gestion_agentModel.Role" Multiplicity="0..1" />
+          <End Role="agent" Type="gestion_agentModel.agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="agent">
+              <PropertyRef Name="Role_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__agent__Service_I__2A4B4B5E">
+          <End Role="service" Type="gestion_agentModel.service" Multiplicity="0..1" />
+          <End Role="agent" Type="gestion_agentModel.agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="service">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="agent">
+              <PropertyRef Name="Service_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_agent_agent">
+          <End Role="agent" Type="gestion_agentModel.agent" Multiplicity="1" />
+          <End Role="agent1" Type="gestion_agentModel.agent" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="agent">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="agent1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_role_agent">
+          <End Role="agent" Type="gestion_agentModel.agent" Multiplicity="1" />
+          <End Role="agent1" Type="gestion_agentModel.agent" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="agent">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="agent1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="gestion_agentModelStoreContainer" CdmEntityContainer="gestion_agentEntities6">
+          <EntitySetMapping Name="agent">
+            <EntityTypeMapping TypeName="gestion_agentModel.agent">
+              <MappingFragment StoreEntitySet="agent">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="CIN" ColumnName="CIN" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Service_Id" ColumnName="Service_Id" />
+                <ScalarProperty Name="Fonction" ColumnName="Fonction" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Demande">
+            <EntityTypeMapping TypeName="gestion_agentModel.Demande">
+              <MappingFragment StoreEntitySet="Demande">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_agent" ColumnName="id_agent" />
+                <ScalarProperty Name="date_demande" ColumnName="date_demande" />
+                <ScalarProperty Name="du" ColumnName="du" />
+                <ScalarProperty Name="au" ColumnName="au" />
+                <ScalarProperty Name="nbrjour" ColumnName="nbrjour" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="Precisions" ColumnName="Precisions" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="opinion" ColumnName="opinion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="registration">
+            <EntityTypeMapping TypeName="gestion_agentModel.registration">
+              <MappingFragment StoreEntitySet="registration">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Passworde" ColumnName="Passworde" />
+                <ScalarProperty Name="confirmPass" ColumnName="confirmPass" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="gestion_agentModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Remarque" ColumnName="Remarque" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="service">
+            <EntityTypeMapping TypeName="gestion_agentModel.service">
+              <MappingFragment StoreEntitySet="service">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Remarque" ColumnName="Remarque" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="typeconge">
+            <EntityTypeMapping TypeName="gestion_agentModel.typeconge">
+              <MappingFragment StoreEntitySet="typeconge">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Remarque" ColumnName="Remarque" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

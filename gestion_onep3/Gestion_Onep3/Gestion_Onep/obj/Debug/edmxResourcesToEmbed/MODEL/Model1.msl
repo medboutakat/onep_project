@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="gestion_agentModelStoreContainer" CdmEntityContainer="gestion_agentEntities6">
+    <EntitySetMapping Name="agent">
+      <EntityTypeMapping TypeName="gestion_agentModel.agent">
+        <MappingFragment StoreEntitySet="agent">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+          <ScalarProperty Name="CIN" ColumnName="CIN" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Service_Id" ColumnName="Service_Id" />
+          <ScalarProperty Name="Fonction" ColumnName="Fonction" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Role_Id" ColumnName="Role_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Demande">
+      <EntityTypeMapping TypeName="gestion_agentModel.Demande">
+        <MappingFragment StoreEntitySet="Demande">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_agent" ColumnName="id_agent" />
+          <ScalarProperty Name="date_demande" ColumnName="date_demande" />
+          <ScalarProperty Name="du" ColumnName="du" />
+          <ScalarProperty Name="au" ColumnName="au" />
+          <ScalarProperty Name="nbrjour" ColumnName="nbrjour" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="Precisions" ColumnName="Precisions" />
+          <ScalarProperty Name="remark" ColumnName="remark" />
+          <ScalarProperty Name="opinion" ColumnName="opinion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="registration">
+      <EntityTypeMapping TypeName="gestion_agentModel.registration">
+        <MappingFragment StoreEntitySet="registration">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Passworde" ColumnName="Passworde" />
+          <ScalarProperty Name="confirmPass" ColumnName="confirmPass" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Role">
+      <EntityTypeMapping TypeName="gestion_agentModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Remarque" ColumnName="Remarque" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="service">
+      <EntityTypeMapping TypeName="gestion_agentModel.service">
+        <MappingFragment StoreEntitySet="service">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Remarque" ColumnName="Remarque" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="typeconge">
+      <EntityTypeMapping TypeName="gestion_agentModel.typeconge">
+        <MappingFragment StoreEntitySet="typeconge">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Remarque" ColumnName="Remarque" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

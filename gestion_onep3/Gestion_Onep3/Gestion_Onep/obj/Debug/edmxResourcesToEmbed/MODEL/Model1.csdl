@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="gestion_agentModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="gestion_agentEntities6" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="agent" EntityType="gestion_agentModel.agent" />
+    <EntitySet Name="Demande" EntityType="gestion_agentModel.Demande" />
+    <EntitySet Name="registration" EntityType="gestion_agentModel.registration" />
+    <EntitySet Name="Role" EntityType="gestion_agentModel.Role" />
+    <EntitySet Name="service" EntityType="gestion_agentModel.service" />
+    <EntitySet Name="typeconge" EntityType="gestion_agentModel.typeconge" />
+    <AssociationSet Name="FK__agent__Role_Id__31EC6D26" Association="gestion_agentModel.FK__agent__Role_Id__31EC6D26">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="agent" EntitySet="agent" />
+    </AssociationSet>
+    <AssociationSet Name="FK__agent__Service_I__2A4B4B5E" Association="gestion_agentModel.FK__agent__Service_I__2A4B4B5E">
+      <End Role="service" EntitySet="service" />
+      <End Role="agent" EntitySet="agent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_agent_agent" Association="gestion_agentModel.FK_agent_agent">
+      <End Role="agent" EntitySet="agent" />
+      <End Role="agent1" EntitySet="agent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_role_agent" Association="gestion_agentModel.FK_role_agent">
+      <End Role="agent" EntitySet="agent" />
+      <End Role="agent1" EntitySet="agent" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="agent">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Prenom" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="CIN" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="Tel" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="Service_Id" Type="Int32" />
+    <Property Name="Fonction" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Password" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Role_Id" Type="Int32" />
+    <NavigationProperty Name="Role" Relationship="gestion_agentModel.FK__agent__Role_Id__31EC6D26" FromRole="agent" ToRole="Role" />
+    <NavigationProperty Name="service" Relationship="gestion_agentModel.FK__agent__Service_I__2A4B4B5E" FromRole="agent" ToRole="service" />
+    <NavigationProperty Name="agent1" Relationship="gestion_agentModel.FK_agent_agent" FromRole="agent" ToRole="agent1" />
+    <NavigationProperty Name="agent2" Relationship="gestion_agentModel.FK_agent_agent" FromRole="agent1" ToRole="agent" />
+    <NavigationProperty Name="agent11" Relationship="gestion_agentModel.FK_role_agent" FromRole="agent" ToRole="agent1" />
+    <NavigationProperty Name="agent3" Relationship="gestion_agentModel.FK_role_agent" FromRole="agent1" ToRole="agent" />
+  </EntityType>
+  <EntityType Name="Demande">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="id_agent" Type="Int32" />
+    <Property Name="date_demande" Type="DateTime" Precision="3" />
+    <Property Name="du" Type="DateTime" Precision="3" />
+    <Property Name="au" Type="DateTime" Precision="3" />
+    <Property Name="nbrjour" Type="Int32" />
+    <Property Name="type" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Precisions" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="remark" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="opinion" Type="Byte" />
+  </EntityType>
+  <EntityType Name="registration">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="40" Unicode="false" FixedLength="false" />
+    <Property Name="Passworde" Type="String" MaxLength="40" Unicode="false" FixedLength="true" />
+    <Property Name="confirmPass" Type="String" MaxLength="40" Unicode="false" FixedLength="true" />
+    <Property Name="mobile" Type="Int32" />
+    <Property Name="Adresse" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Remarque" Type="String" MaxLength="250" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="agent" Relationship="gestion_agentModel.FK__agent__Role_Id__31EC6D26" FromRole="Role" ToRole="agent" />
+  </EntityType>
+  <EntityType Name="service">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Remarque" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="agent" Relationship="gestion_agentModel.FK__agent__Service_I__2A4B4B5E" FromRole="service" ToRole="agent" />
+  </EntityType>
+  <EntityType Name="typeconge">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="Remarque" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK__agent__Role_Id__31EC6D26">
+    <End Role="Role" Type="gestion_agentModel.Role" Multiplicity="0..1" />
+    <End Role="agent" Type="gestion_agentModel.agent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="agent">
+        <PropertyRef Name="Role_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__agent__Service_I__2A4B4B5E">
+    <End Role="service" Type="gestion_agentModel.service" Multiplicity="0..1" />
+    <End Role="agent" Type="gestion_agentModel.agent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="service">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="agent">
+        <PropertyRef Name="Service_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_agent_agent">
+    <End Role="agent" Type="gestion_agentModel.agent" Multiplicity="1" />
+    <End Role="agent1" Type="gestion_agentModel.agent" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="agent">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="agent1">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_role_agent">
+    <End Role="agent" Type="gestion_agentModel.agent" Multiplicity="1" />
+    <End Role="agent1" Type="gestion_agentModel.agent" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="agent">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="agent1">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

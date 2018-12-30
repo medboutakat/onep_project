@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="gestion_agentModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="gestion_agentModelStoreContainer">
+    <EntitySet Name="agent" EntityType="gestion_agentModel.Store.agent" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Demande" EntityType="gestion_agentModel.Store.Demande" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="registration" EntityType="gestion_agentModel.Store.registration" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Role" EntityType="gestion_agentModel.Store.Role" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="service" EntityType="gestion_agentModel.Store.service" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="typeconge" EntityType="gestion_agentModel.Store.typeconge" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__agent__Role_Id__31EC6D26" Association="gestion_agentModel.Store.FK__agent__Role_Id__31EC6D26">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="agent" EntitySet="agent" />
+    </AssociationSet>
+    <AssociationSet Name="FK__agent__Service_I__2A4B4B5E" Association="gestion_agentModel.Store.FK__agent__Service_I__2A4B4B5E">
+      <End Role="service" EntitySet="service" />
+      <End Role="agent" EntitySet="agent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_agent_agent" Association="gestion_agentModel.Store.FK_agent_agent">
+      <End Role="agent" EntitySet="agent" />
+      <End Role="agent1" EntitySet="agent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_role_agent" Association="gestion_agentModel.Store.FK_role_agent">
+      <End Role="agent" EntitySet="agent" />
+      <End Role="agent1" EntitySet="agent" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="agent">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="varchar" MaxLength="20" />
+    <Property Name="Prenom" Type="varchar" MaxLength="20" />
+    <Property Name="CIN" Type="varchar" MaxLength="30" />
+    <Property Name="Tel" Type="int" />
+    <Property Name="Email" Type="varchar" MaxLength="30" />
+    <Property Name="Service_Id" Type="int" />
+    <Property Name="Fonction" Type="varchar" MaxLength="50" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="50" />
+    <Property Name="Role_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="Demande">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="id_agent" Type="int" />
+    <Property Name="date_demande" Type="datetime" />
+    <Property Name="du" Type="datetime" />
+    <Property Name="au" Type="datetime" />
+    <Property Name="nbrjour" Type="int" />
+    <Property Name="type" Type="varchar" MaxLength="50" />
+    <Property Name="Precisions" Type="varchar(max)" />
+    <Property Name="remark" Type="varchar(max)" />
+    <Property Name="opinion" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="registration">
+    <Key>
+      <PropertyRef Name="UserName" />
+    </Key>
+    <Property Name="UserName" Type="varchar" Nullable="false" MaxLength="40" />
+    <Property Name="Passworde" Type="char" MaxLength="40" />
+    <Property Name="confirmPass" Type="char" MaxLength="40" />
+    <Property Name="mobile" Type="int" />
+    <Property Name="Adresse" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="varchar" MaxLength="50" />
+    <Property Name="Remarque" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="service">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="varchar" MaxLength="20" />
+    <Property Name="Remarque" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="typeconge">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Nom" Type="varchar" MaxLength="20" />
+    <Property Name="Remarque" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="FK__agent__Role_Id__31EC6D26">
+    <End Role="Role" Type="gestion_agentModel.Store.Role" Multiplicity="0..1" />
+    <End Role="agent" Type="gestion_agentModel.Store.agent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="agent">
+        <PropertyRef Name="Role_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__agent__Service_I__2A4B4B5E">
+    <End Role="service" Type="gestion_agentModel.Store.service" Multiplicity="0..1" />
+    <End Role="agent" Type="gestion_agentModel.Store.agent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="service">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="agent">
+        <PropertyRef Name="Service_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_agent_agent">
+    <End Role="agent" Type="gestion_agentModel.Store.agent" Multiplicity="1" />
+    <End Role="agent1" Type="gestion_agentModel.Store.agent" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="agent">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="agent1">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_role_agent">
+    <End Role="agent" Type="gestion_agentModel.Store.agent" Multiplicity="1" />
+    <End Role="agent1" Type="gestion_agentModel.Store.agent" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="agent">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="agent1">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
